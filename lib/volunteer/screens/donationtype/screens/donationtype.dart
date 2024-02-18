@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import 'package:gscapp/utils/constants/colors.dart';
 import 'package:gscapp/volunteer/screens/donationtype/screens/widgets/fee_option_list.dart';
 
 class Donationtype extends StatelessWidget {
@@ -9,6 +10,7 @@ class Donationtype extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: ThemeColors.scaffold,
       appBar: AppBar(),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8.0),

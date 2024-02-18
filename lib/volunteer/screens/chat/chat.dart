@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import "package:gscapp/utils/constants/colors.dart";
 import "package:gscapp/volunteer/screens/chat/widgets/chatitem.dart";
 
 class Chat extends StatelessWidget {
@@ -7,6 +8,7 @@ class Chat extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: ThemeColors.scaffold,
       body: Column(
         children: [ChatItem(), ChatItem(), ChatItem()],
       ),

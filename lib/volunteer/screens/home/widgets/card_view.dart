@@ -14,7 +14,7 @@ class CardView extends StatelessWidget {
         height: MediaQuery.of(context).size.height * 0.25,
         width: 300,
         decoration: BoxDecoration(
-            color: Color(0xffe9dac4),
+            color: Color.fromARGB(255, 245, 233, 219),
             borderRadius: BorderRadius.all(Radius.circular(6))),
         child: Container(
           padding: EdgeInsets.all(8),

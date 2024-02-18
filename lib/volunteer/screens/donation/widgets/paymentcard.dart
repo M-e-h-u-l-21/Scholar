@@ -11,8 +11,11 @@ class CardContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(8),
+        color: c,
+      ),
       width: double.infinity,
-      color: c,
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Row(
@@ -23,27 +26,36 @@ class CardContainer extends StatelessWidget {
               color: Colors.black,
             ),
             SizedBox(
-              width: MediaQuery.of(context).size.width * 0.08,
+              width: MediaQuery.of(context).size.width * 0.05,
             ),
             SizedBox(
-              child: Text("Ronit"),
-              width: MediaQuery.of(context).size.width * 0.10,
+              child: Text(
+                "Ronit Gupta",
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              width: MediaQuery.of(context).size.width * 0.22,
             ),
             SizedBox(
-              width: MediaQuery.of(context).size.width * 0.10,
+              width: MediaQuery.of(context).size.width * 0.04,
             ),
             SizedBox(
-              child: Text("28,000"),
+              child: Text(
+                "28,000",
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
               width: MediaQuery.of(context).size.width * 0.13,
             ),
             SizedBox(
-              width: MediaQuery.of(context).size.width * 0.10,
+              width: MediaQuery.of(context).size.width * 0.08,
             ),
             SizedBox(
-              child: Text("UPI"),
+              child: Text(
+                "UPI",
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
               width: MediaQuery.of(context).size.width * 0.14,
             ),
-            SizedBox(width: MediaQuery.of(context).size.width * 0.06),
+            // SizedBox(width: MediaQuery.of(context).size.width * 0.06),
             // Stack(
             //   alignment: Alignment.centerRight,
             //   children: [

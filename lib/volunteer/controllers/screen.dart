@@ -26,6 +26,7 @@ class _ScreenState extends State<Screen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0XFFFFFEF9),
       appBar: AppBar(
         backgroundColor: Color(0xFF161733),
         title: Text(
@@ -35,7 +36,7 @@ class _ScreenState extends State<Screen> {
       ),
       body: _pages[_selectedIndex],
       bottomNavigationBar: Container(
-        margin: EdgeInsets.only(top: 8),
+        margin: EdgeInsets.only(top: 4),
         child: BottomNavigationBar(
           backgroundColor: Color(0XFF161733),
           currentIndex: _selectedIndex,

@@ -12,18 +12,18 @@ class UpcomingContribution extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(
-          padding: EdgeInsets.only(left: 8),
-          child: Text(
-            "Upcoming Contribution",
-            style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-                fontFamily: 'Niramit'),
-          ),
-        ),
+        // Padding(
+        //   padding: EdgeInsets.only(left: 8),
+        //   child: Text(
+        //     "Upcoming Contribution",
+        //     style: TextStyle(
+        //         fontSize: 24,
+        //         fontWeight: FontWeight.bold,
+        //         fontFamily: 'Niramit'),
+        //   ),
+        // ),
         SizedBox(
-          height: 24,
+          height: MediaQuery.of(context).size.height * 0.020,
         ),
         Container(
           width: double.infinity,
@@ -36,21 +36,21 @@ class UpcomingContribution extends StatelessWidget {
               ),
               Container(
                   height: MediaQuery.of(context).size.height * 0.04,
-                  child: VerticalDivider(color: Colors.grey[600])),
+                  child: VerticalDivider(color: Colors.grey[400])),
               CardContainer(
                 c: ThemeColors.lightGreen,
               ),
               Container(
                   height: MediaQuery.of(context).size.height * 0.02,
-                  child: VerticalDivider(color: Colors.grey[600])),
+                  child: VerticalDivider(color: Colors.grey[400])),
               CardContainer(
-                c:ThemeColors.lightGreen,
+                c: ThemeColors.lightGreen,
               ),
               Container(
                   height: MediaQuery.of(context).size.height * 0.02,
-                  child: VerticalDivider(color: Colors.grey[600])),
+                  child: VerticalDivider(color: Colors.grey[400])),
               CardContainer(
-                c:ThemeColors.lightGreen,
+                c: ThemeColors.lightGreen,
               ),
             ],
           ),

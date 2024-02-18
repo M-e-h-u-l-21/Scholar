@@ -1,10 +1,13 @@
 import "package:flutter/material.dart";
+import "package:gscapp/utils/constants/colors.dart";
 
 class Profile extends StatelessWidget {
-const Profile({ Key? key }) : super(key: key);
+  const Profile({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context){
-    return Container();
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: ThemeColors.scaffold,
+    );
   }
 }

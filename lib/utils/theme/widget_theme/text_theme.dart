@@ -33,6 +33,8 @@ class Texttheme {
         fontSize: 12.0,
         fontWeight: FontWeight.normal,
         color: ThemeColors.dark.withOpacity(0.5)),
+    labelSmall: const TextStyle().copyWith(
+        fontWeight: FontWeight.w600, color: Color(0XFF969696), fontSize: 16),
   );
 
   /// Customizable Dark Text Theme

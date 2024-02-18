@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import 'package:gscapp/utils/constants/colors.dart';
 import 'package:gscapp/volunteer/screens/home/widgets/horizontal_scroll_complete.dart';
 import 'package:gscapp/volunteer/screens/home/widgets/top_carousel.dart';
 import 'package:gscapp/volunteer/screens/home/widgets/urgentScroll.dart';
@@ -14,6 +15,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: ThemeColors.scaffold,
       body: Padding(
         padding: const EdgeInsets.only(
           left: 16.0,
