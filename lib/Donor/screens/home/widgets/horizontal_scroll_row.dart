@@ -1,5 +1,5 @@
 import "package:flutter/material.dart";
-import 'package:gscapp/volunteer/screens/home/widgets/horizontal_scroll_item.dart';
+import 'package:gscapp/Donor/screens/home/widgets/horizontal_scroll_item.dart';
 
 class HorizontalScrollTab extends StatelessWidget {
   const HorizontalScrollTab({Key? key}) : super(key: key);

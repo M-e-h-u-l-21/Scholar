@@ -1,7 +1,7 @@
 import "package:flutter/material.dart";
 import "package:gscapp/utils/constants/colors.dart";
-import "package:gscapp/volunteer/screens/donation/widgets/pastContribution.dart";
-import "package:gscapp/volunteer/screens/donation/widgets/upcomingPayment.dart";
+import 'package:gscapp/Donor/screens/donation/widgets/pastContribution.dart';
+import 'package:gscapp/Donor/screens/donation/widgets/upcomingPayment.dart';
 
 class Donation extends StatelessWidget {
   const Donation({Key? key}) : super(key: key);

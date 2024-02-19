@@ -1,6 +1,6 @@
 import "package:flutter/material.dart";
-import "package:gscapp/volunteer/models/feeOption.dart";
-import 'package:gscapp/volunteer/screens/donationtype/screens/widgets/fee_option_card.dart';
+import 'package:gscapp/Donor/models/feeOption.dart';
+import 'package:gscapp/Donor/screens/donationtype/screens/widgets/fee_option_card.dart';
 
 class FeeOptionList extends StatefulWidget {
   const FeeOptionList({

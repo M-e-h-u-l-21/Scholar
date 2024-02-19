@@ -1,6 +1,6 @@
 import "package:carousel_slider/carousel_slider.dart";
 import "package:flutter/material.dart";
-import 'package:gscapp/volunteer/screens/home/widgets/carousel_item.dart';
+import 'package:gscapp/Donor/screens/home/widgets/carousel_item.dart';
 
 class Carousel extends StatelessWidget {
   const Carousel({

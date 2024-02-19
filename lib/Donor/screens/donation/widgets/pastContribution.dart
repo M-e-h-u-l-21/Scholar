@@ -1,6 +1,6 @@
 import "package:flutter/material.dart";
 import "package:gscapp/utils/constants/colors.dart";
-import "package:gscapp/volunteer/screens/donation/widgets/paymentcard.dart";
+import 'package:gscapp/Donor/screens/donation/widgets/paymentcard.dart';
 
 class PastContribution extends StatelessWidget {
   const PastContribution({Key? key}) : super(key: key);

@@ -1,8 +1,8 @@
 import "package:flutter/material.dart";
 import 'package:gscapp/utils/constants/colors.dart';
-import 'package:gscapp/volunteer/screens/home/widgets/horizontal_scroll_complete.dart';
-import 'package:gscapp/volunteer/screens/home/widgets/top_carousel.dart';
-import 'package:gscapp/volunteer/screens/home/widgets/urgentScroll.dart';
+import 'package:gscapp/Donor/screens/home/widgets/horizontal_scroll_complete.dart';
+import 'package:gscapp/Donor/screens/home/widgets/top_carousel.dart';
+import 'package:gscapp/Donor/screens/home/widgets/urgentScroll.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);

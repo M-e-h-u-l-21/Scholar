@@ -1,6 +1,6 @@
 import "package:flutter/material.dart";
-import 'package:gscapp/volunteer/screens/donationtype/screens/donationtype.dart';
-import "package:gscapp/volunteer/screens/studentProfile/studentdetail.dart";
+import 'package:gscapp/Donor/screens/donationtype/screens/donationtype.dart';
+import 'package:gscapp/Donor/screens/studentProfile/studentdetail.dart';
 
 class CardView extends StatelessWidget {
   const CardView({Key? key}) : super(key: key);

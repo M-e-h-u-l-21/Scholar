@@ -1,5 +1,5 @@
 import "package:flutter/material.dart";
-import 'package:gscapp/volunteer/screens/home/widgets/horizontal_scroll_row.dart';
+import 'package:gscapp/Donor/screens/home/widgets/horizontal_scroll_row.dart';
 
 class HorizontalScroll extends StatelessWidget {
   const HorizontalScroll({

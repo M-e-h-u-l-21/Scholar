@@ -1,8 +1,8 @@
 import "package:flutter/material.dart";
-import 'package:gscapp/volunteer/screens/chat/chat.dart';
-import 'package:gscapp/volunteer/screens/donation/donation.dart';
-import 'package:gscapp/volunteer/screens/home/home_page.dart';
-import 'package:gscapp/volunteer/screens/profile/profile.dart';
+import 'package:gscapp/Donor/screens/chat/chat.dart';
+import 'package:gscapp/Donor/screens/donation/donation.dart';
+import 'package:gscapp/Donor/screens/home/home_page.dart';
+import 'package:gscapp/Donor/screens/profile/profile.dart';
 
 class Screen extends StatefulWidget {
   const Screen({Key? key}) : super(key: key);

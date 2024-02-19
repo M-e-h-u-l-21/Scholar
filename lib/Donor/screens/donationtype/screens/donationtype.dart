@@ -1,6 +1,6 @@
 import "package:flutter/material.dart";
 import 'package:gscapp/utils/constants/colors.dart';
-import 'package:gscapp/volunteer/screens/donationtype/screens/widgets/fee_option_list.dart';
+import 'package:gscapp/Donor/screens/donationtype/screens/widgets/fee_option_list.dart';
 
 class Donationtype extends StatelessWidget {
   const Donationtype({Key? key}) : super(key: key);

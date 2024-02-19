@@ -1,6 +1,6 @@
 import "package:flutter/material.dart";
 import "package:gscapp/utils/constants/colors.dart";
-import "package:gscapp/volunteer/screens/chat/widgets/chatitem.dart";
+import 'package:gscapp/Donor/screens/chat/widgets/chatitem.dart';
 
 class Chat extends StatelessWidget {
   const Chat({Key? key}) : super(key: key);

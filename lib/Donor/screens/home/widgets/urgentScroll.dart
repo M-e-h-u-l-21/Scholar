@@ -1,5 +1,5 @@
 import "package:flutter/material.dart";
-import 'package:gscapp/volunteer/screens/home/widgets/card_view.dart';
+import 'package:gscapp/Donor/screens/home/widgets/card_view.dart';
 
 class UrgentScroll extends StatelessWidget {
   const UrgentScroll({Key? key}) : super(key: key);
