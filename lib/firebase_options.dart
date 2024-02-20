@@ -63,6 +63,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '136774759408',
     projectId: 'scholar-b2b93',
     storageBucket: 'scholar-b2b93.appspot.com',
+    iosClientId: '136774759408-g57f2kdkos7frpugvbpuiioa8kq0ae8r.apps.googleusercontent.com',
     iosBundleId: 'com.example.gscapp',
   );
 }

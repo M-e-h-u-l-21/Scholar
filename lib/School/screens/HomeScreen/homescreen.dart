@@ -1,4 +1,7 @@
+import "package:firebase_auth/firebase_auth.dart";
 import "package:flutter/material.dart";
+import 'package:gscapp/Authentication/screens/landingPage.dart';
+import 'package:gscapp/Authentication/screens/signinscreen.dart';
 import "package:gscapp/School/screens/HomeScreen/widgets/studentprofilecard.dart";
 import "package:gscapp/School/screens/NewStudent/newStudent.dart";
 import "package:gscapp/utils/constants/colors.dart";
@@ -15,6 +18,22 @@ class Homescreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: ThemeColors.deepblue,
+        leading: IconButton(
+          icon: Icon(
+            Icons.logout,
+            color: Colors.white,
+          ),
+          onPressed: () async {
+            await FirebaseAuth.instance.signOut();
+
+            Navigator.of(context).pushAndRemoveUntil(
+              MaterialPageRoute(
+                builder: (context) => LandingPage(),
+              ),
+              (route) => false,
+            );
+          },
+        ),
         actions: [
           IconButton(
               onPressed: () {
@@ -46,7 +65,6 @@ class Homescreen extends StatelessWidget {
                     color: Color(0X80e9dcc4),
                     borderRadius: BorderRadius.circular(8)),
                 width: double.infinity,
-                height: height * 0.26,
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Column(

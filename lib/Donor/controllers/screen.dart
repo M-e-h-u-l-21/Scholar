@@ -1,4 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import "package:flutter/material.dart";
+import 'package:gscapp/Authentication/screens/landingPage.dart';
+import 'package:gscapp/Authentication/screens/signinscreen.dart';
 import 'package:gscapp/Donor/screens/chat/chat.dart';
 import 'package:gscapp/Donor/screens/donation/donation.dart';
 import 'package:gscapp/Donor/screens/home/home_page.dart';
@@ -33,6 +36,23 @@ class _ScreenState extends State<Screen> {
           labellist[_selectedIndex],
           style: TextStyle(color: Colors.white),
         ),
+        leading: labellist[_selectedIndex] == "Profile"
+            ? IconButton(
+                onPressed: () async {
+                  await FirebaseAuth.instance.signOut();
+
+                  Navigator.of(context).pushAndRemoveUntil(
+                    MaterialPageRoute(
+                      builder: (context) => LandingPage(),
+                    ),
+                    (route) => false,
+                  );
+                },
+                icon: Icon(
+                  Icons.logout,
+                  color: Colors.white,
+                ))
+            : null,
       ),
       body: _pages[_selectedIndex],
       bottomNavigationBar: Container(

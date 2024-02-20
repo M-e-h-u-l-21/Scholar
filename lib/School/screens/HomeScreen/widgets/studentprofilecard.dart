@@ -12,9 +12,8 @@ class StudentProfileCard extends StatelessWidget {
 
     return Container(
       color: Colors.green[100],
-      height: height * 0.215,
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 12),
+        padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: height * 0.01),
         child: Container(
           child: Column(
             children: [
