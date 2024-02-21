@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import 'package:gscapp/Donor/screens/home/helpers/datafetch.dart';
 import 'package:gscapp/utils/constants/colors.dart';
 import 'package:gscapp/Donor/screens/home/widgets/horizontal_scroll_complete.dart';
 import 'package:gscapp/Donor/screens/home/widgets/top_carousel.dart';
@@ -12,6 +13,24 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  Map<String, dynamic> studentData = {};
+  fetchData _fetchData = fetchData();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    fetchAndSetStudentData();
+  }
+
+  Future<void> fetchAndSetStudentData() async {
+    Map<String, dynamic> data = await _fetchData.fetchStudentData();
+    setState(() {
+      studentData = data;
+      print(data);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -68,7 +87,7 @@ class _HomePageState extends State<HomePage> {
                 height: 8,
               ),
 
-              UrgentScroll(),
+              UrgentScroll(studentData: studentData,),
 
               SizedBox(
                 height: 16,
@@ -96,7 +115,9 @@ class _HomePageState extends State<HomePage> {
                 height: 8,
               ),
 
-              UrgentScroll(),
+              UrgentScroll(
+                studentData: studentData,
+              ),
 
               SizedBox(
                 height: 8,

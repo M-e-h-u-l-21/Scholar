@@ -1,5 +1,6 @@
 import "package:firebase_auth/firebase_auth.dart";
 import "package:flutter/material.dart";
+import "package:gscapp/School/model/student.dart";
 import "package:gscapp/School/screens/NewStudent/helper/firebasehelper.dart";
 import "package:gscapp/School/screens/NewStudent/services/firebase_services.dart";
 import "package:gscapp/School/screens/NewStudent/widgets/formfield.dart";
@@ -8,8 +9,9 @@ import "package:gscapp/utils/constants/colors.dart";
 import "package:gscapp/utils/constants/device_utility.dart";
 
 class NewStudent extends StatefulWidget {
-  const NewStudent({Key? key}) : super(key: key);
-
+  final void Function(Student)? updateStudentDataCallback;
+  const NewStudent({Key? key, required this.updateStudentDataCallback, })
+      : super(key: key);
   @override
   State<NewStudent> createState() => _NewStudentState();
 }
@@ -29,7 +31,6 @@ class _NewStudentState extends State<NewStudent> {
 
   final FirebaseService _firebaseService = FirebaseService();
   final FirebaseHelper _firebaseHelper = FirebaseHelper();
-
 
   @override
   Widget build(BuildContext context) {
@@ -209,22 +210,19 @@ class _NewStudentState extends State<NewStudent> {
                 ],
               ),
               TextButton(
-                  onPressed: () {
-                    _firebaseService.createStudent(
-                        _studentname,
-                        grade,
-                        _fatherName,
-                        _fatheroccupation,
-                        _motheroccuptation,
-                        annualincome,
-                        famcount,
-                        "xyz",
-                        scholarNo,
-                        _address,
-                        stucontactno,
-                        guardcontactno,
-                        context);
-                  },
+                  onPressed: () => widget.updateStudentDataCallback!(Student(
+                      name: _studentname,
+                      standard: grade,
+                      fathersName: _fatherName,
+                      fathersOccupation: _fatheroccupation,
+                      mothersOccupation: _motheroccuptation,
+                      annualIncome: annualincome,
+                      numFamMembers: famcount,
+                      schoolName: "",
+                      scholarNo: scholarNo,
+                      address: _address,
+                      stuContactNo: stucontactno,
+                      guardContactNo: guardcontactno)),
                   child: Text("Submit Application"))
             ],
           ),

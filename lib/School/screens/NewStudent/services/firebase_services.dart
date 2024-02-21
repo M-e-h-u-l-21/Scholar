@@ -28,6 +28,7 @@ class FirebaseService {
       await _firestore.collection('schools').doc(uid).update({
         'students': FieldValue.arrayUnion([studentRef]),
       });
+      print("Ye pehle ho jaana chahiye");
     } catch (e) {
       print('Error adding student to school: $e');
       throw e;
@@ -69,6 +70,7 @@ class FirebaseService {
     bool success = await addStudent(newstudent);
     if (success) {
       await addStudentToSchool(user!.uid);
+      // print("YE baad ka hai");
       Navigator.pop(context);
     }
   }

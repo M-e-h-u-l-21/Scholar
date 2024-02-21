@@ -3,8 +3,13 @@ import "package:gscapp/utils/constants/device_utility.dart";
 
 class StudentProfileCard extends StatelessWidget {
   const StudentProfileCard({
-    super.key,
+    super.key, required this.name, required this.verifiedBy, required this.verifiedOn,
   });
+
+  final String name;
+  final String verifiedBy;
+  final String verifiedOn;
+
   @override
   Widget build(BuildContext context) {
     final height = TDeviceUtils.getScreenHeight(context);
@@ -29,7 +34,7 @@ class StudentProfileCard extends StatelessWidget {
                 height: height * 0.01,
               ),
               Text(
-                "Tony Roy",
+                name,
                 style: TextStyle(fontSize: 16),
               ),
               SizedBox(
@@ -52,11 +57,11 @@ class StudentProfileCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "Pankaj Rajmani",
+                    verifiedBy,
                     style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
                   ),
                   Text(
-                    "26/10/23",
+                    verifiedOn,
                     style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
                   )
                 ],

@@ -1,14 +1,66 @@
+import "package:cloud_firestore/cloud_firestore.dart";
 import "package:firebase_auth/firebase_auth.dart";
 import "package:flutter/material.dart";
 import 'package:gscapp/Authentication/screens/landingPage.dart';
 import 'package:gscapp/Authentication/screens/signinscreen.dart';
+import "package:gscapp/School/model/student.dart";
+import 'package:gscapp/School/screens/HomeScreen/services/fetchData.dart';
+import "package:gscapp/School/screens/HomeScreen/widgets/stats_container.dart";
 import "package:gscapp/School/screens/HomeScreen/widgets/studentprofilecard.dart";
 import "package:gscapp/School/screens/NewStudent/newStudent.dart";
+import "package:gscapp/School/screens/NewStudent/services/firebase_services.dart";
 import "package:gscapp/utils/constants/colors.dart";
 import "package:gscapp/utils/constants/device_utility.dart";
 
-class Homescreen extends StatelessWidget {
+class Homescreen extends StatefulWidget {
   const Homescreen({Key? key}) : super(key: key);
+
+  @override
+  State<Homescreen> createState() => _HomescreenState();
+}
+
+class _HomescreenState extends State<Homescreen> {
+  FirebaseService _firebaseService = FirebaseService();
+  fetchData _fetchData = fetchData();
+  User? user = FirebaseAuth.instance.currentUser;
+  Map<String, dynamic> studentData = {};
+  @override
+  void initState() {
+    super.initState();
+    fetchAndSetStudentData();
+  }
+
+  Future<void> fetchAndSetStudentData() async {
+    Map<String, dynamic> data = await _fetchData.fetchStudentData();
+    setState(() {
+      studentData = data;
+    });
+  }
+
+  void updateStudentData(Student student) async {
+    await _firebaseService.createStudent(
+        student.name,
+        student.standard,
+        student.fathersName,
+        student.fathersOccupation,
+        student.mothersOccupation,
+        student.annualIncome,
+        student.numFamMembers,
+        student.schoolName,
+        student.scholarNo,
+        student.address,
+        student.stuContactNo,
+        student.guardContactNo,
+        context);
+
+    Map<String, dynamic> data = await _fetchData.fetchStudentData();
+
+    setState(() {
+      studentData = data; //Ye change krna padega
+      print("Ye pehle ho gya");
+    });
+    
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +92,8 @@ class Homescreen extends StatelessWidget {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const NewStudent(),
+                      builder: (context) => NewStudent(
+                          updateStudentDataCallback: updateStudentData),
                     ));
               },
               icon: Icon(
@@ -60,122 +113,7 @@ class Homescreen extends StatelessWidget {
           child: Column(
             children: [
               //Top card
-              Container(
-                decoration: BoxDecoration(
-                    color: Color(0X80e9dcc4),
-                    borderRadius: BorderRadius.circular(8)),
-                width: double.infinity,
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        //Overview Text
-                        Text(
-                          "Overview",
-                          style: TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.bold),
-                        ),
-
-                        SizedBox(
-                          height: height * 0.015,
-                        ),
-
-                        //Column
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                          child: Column(
-                            children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    "Application Submitted",
-                                    style: TextStyle(fontSize: 14),
-                                  ),
-                                  Text(
-                                    "390",
-                                    style: TextStyle(fontSize: 14),
-                                  )
-                                ],
-                              ),
-                              Container(
-                                child: Divider(
-                                  height: 10,
-                                  thickness: 1.5,
-                                  color: Color(0XFFC8C8C8),
-                                ),
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    "Application Under Review",
-                                    style: TextStyle(fontSize: 14),
-                                  ),
-                                  Text(
-                                    "390",
-                                    style: TextStyle(fontSize: 14),
-                                  )
-                                ],
-                              ),
-                              Container(
-                                child: Divider(
-                                  height: 10,
-                                  thickness: 1.5,
-                                  color: Color(0XFFC8C8C8),
-                                ),
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    "Total Applications Verified",
-                                    style: TextStyle(fontSize: 14),
-                                  ),
-                                  Text(
-                                    "390",
-                                    style: TextStyle(fontSize: 14),
-                                  )
-                                ],
-                              ),
-                              Container(
-                                child: Divider(
-                                  height: 10,
-                                  thickness: 1.5,
-                                  color: Color(0XFFC8C8C8),
-                                ),
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    "Total Donors",
-                                    style: TextStyle(fontSize: 14),
-                                  ),
-                                  Text(
-                                    "390",
-                                    style: TextStyle(fontSize: 14),
-                                  )
-                                ],
-                              ),
-                              Container(
-                                child: Divider(
-                                  height: 10,
-                                  thickness: 1.5,
-                                  color: Color(0XFFC8C8C8),
-                                ),
-                              ),
-                            ],
-                          ),
-                        )
-                      ]),
-                ),
-              ),
+              StatsContainer(height: height),
 
               SizedBox(
                 height: height * 0.03,
@@ -200,58 +138,62 @@ class Homescreen extends StatelessWidget {
               //Tab View
               Expanded(
                 child: DefaultTabController(
-                    length: 2,
-                    child: Scaffold(
-                      appBar: AppBar(
-                        toolbarHeight: height * 0.02,
-                        bottom: const TabBar(tabs: [
-                          Tab(
-                            text: "Verified Profiles",
-                          ),
-                          Tab(text: "Pending Profiles")
-                        ]),
+                  length: 2,
+                  child: Scaffold(
+                    appBar: AppBar(
+                      toolbarHeight: height * 0.02,
+                      bottom: const TabBar(tabs: [
+                        Tab(
+                          text: "Verified Profiles",
+                        ),
+                        Tab(text: "Pending Profiles")
+                      ]),
+                    ),
+                    body: Padding(
+                      padding: const EdgeInsets.only(top: 8.0),
+                      child: TabBarView(
+                        children: [
+                          GridView.builder(
+                              gridDelegate:
+                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount: 2,
+                                      crossAxisSpacing: 8,
+                                      mainAxisSpacing: 8),
+                              itemCount: studentData.length,
+                              itemBuilder: (context, index) {
+                                String studentId =
+                                    studentData.keys.elementAt(index);
+                                Map<String, dynamic> studentInfo =
+                                    studentData[studentId];
+                                return StudentProfileCard(
+                                    name: studentInfo['studentname'],
+                                    verifiedBy: "",
+                                    verifiedOn: "");
+                              }),
+                          GridView.builder(
+                              gridDelegate:
+                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount: 2,
+                                      crossAxisSpacing: 8,
+                                      mainAxisSpacing: 8),
+                              itemCount: studentData.length,
+                              itemBuilder: (context, index) {
+                                String studentId =
+                                    studentData.keys.elementAt(index);
+                                Map<String, dynamic> studentInfo =
+                                    studentData[studentId];
+                                return StudentProfileCard(
+                                    name: studentInfo['studentname'],
+                                    verifiedBy: "",
+                                    verifiedOn: "");
+                              })
+                          // Other TabBarView children...
+                        ],
                       ),
-                      body: Padding(
-                        padding: const EdgeInsets.only(top: 8.0),
-                        child: TabBarView(children: [
-                          GridView.count(
-                            primary: false,
-                            padding: EdgeInsets.symmetric(vertical: 8),
-                            crossAxisSpacing: width * 0.08,
-                            mainAxisSpacing: height * 0.04,
-                            crossAxisCount: 2,
-                            children: <Widget>[
-                              StudentProfileCard(),
-                              StudentProfileCard(),
-                              StudentProfileCard(),
-                              StudentProfileCard(),
-                              StudentProfileCard(),
-                              StudentProfileCard(),
-                              StudentProfileCard(),
-                            ],
-                          ),
-                          GridView.count(
-                            primary: false,
-                            padding: EdgeInsets.symmetric(vertical: 8),
-                            crossAxisSpacing: width * 0.08,
-                            mainAxisSpacing: height * 0.04,
-                            crossAxisCount: 2,
-                            children: <Widget>[
-                              StudentProfileCard(),
-                              StudentProfileCard(),
-                              StudentProfileCard(),
-                              StudentProfileCard(),
-                              StudentProfileCard(),
-                              StudentProfileCard(),
-                              StudentProfileCard(),
-                            ],
-                          ),
-                        ]),
-                      ),
-                    )),
-              ),
-
-              // Grid View
+                    ),
+                  ),
+                ),
+              ) // Grid View
             ],
           ),
         ),
