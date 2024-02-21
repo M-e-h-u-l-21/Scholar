@@ -1,27 +1,33 @@
 import "package:flutter/material.dart";
 import 'package:gscapp/Donor/screens/donationtype/screens/donationtype.dart';
 import 'package:gscapp/Donor/screens/studentProfile/studentdetail.dart';
+import 'package:gscapp/utils/constants/device_utility.dart';
 
 class CardView extends StatelessWidget {
-  const CardView({super.key, required this.studentName});
+  CardView({super.key, required this.studentName});
 
-  final String studentName;
+  String studentName;
 
   @override
   Widget build(BuildContext context) {
+    final height = TDeviceUtils.getScreenHeight(context);
+    final width = TDeviceUtils.getScreenWidth(context);
     return GestureDetector(
-      onTap: () => Navigator.push(context,
-          MaterialPageRoute(builder: (context) => const Studentdetail())),
+      onTap: () => Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => Studentdetail(
+                    stuname: studentName,
+                  ))),
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Container(
-          height: MediaQuery.of(context).size.height * 0.25,
-          width: 300,
+          // height: height * 0.25,
           decoration: BoxDecoration(
               color: Color.fromARGB(255, 245, 233, 219),
               borderRadius: BorderRadius.all(Radius.circular(6))),
           child: Container(
-            padding: EdgeInsets.only(right: 4),
+            padding: EdgeInsets.only(top: 16, bottom: 16, right: 4),
             child: Row(
               children: [
                 Padding(
@@ -44,30 +50,29 @@ class CardView extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      SizedBox(
-                        height: 21,
-                      ),
-                      Text(
-                        "•Temp1",
-                        style: TextStyle(fontSize: 16),
-                      ),
-                      Text(
-                        "•Temp2",
-                        style: TextStyle(fontSize: 16),
-                      ),
-                      Text(
-                        "•Temp3",
-                        style: TextStyle(fontSize: 16),
-                      ),
-                      Text(
-                        "•Temp4",
-                        style: TextStyle(fontSize: 16),
-                      ),
-                      SizedBox(
-                        height: 6,
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "•NTSE Scholar",
+                            style: TextStyle(fontSize: 16),
+                          ),
+                          Text(
+                            "•NSTSE qualified",
+                            style: TextStyle(fontSize: 16),
+                          ),
+                          Text(
+                            "•State level runner",
+                            style: TextStyle(fontSize: 16),
+                          ),
+                          // Text(
+                          //   "•Temp4",
+                          //   style: TextStyle(fontSize: 16),
+                          // ),
+                        ],
                       ),
                       TextButton(
                           onPressed: () {

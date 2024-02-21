@@ -31,32 +31,27 @@ class _FeeOptionListState extends State<FeeOptionList> {
       "10",
       "4000",
     ),
+    
   ];
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      height: MediaQuery.of(context).size.height,
-      child: Column(children: [
-        Expanded(
-            child: ListView.builder(
-          itemCount: cards.length,
-          itemBuilder: (context, index) {
-            return FeeOptionCard(
-              month: cards[index].month,
-              percentage: cards[index].percentage,
-              amount: cards[index].amount,
-              isSelected: _selectedIndex == index,
-              onTap: () {
-                setState(() {
-                  _selectedIndex = index;
-                });
-              },
-            );
+    return Expanded(
+        child: ListView.builder(
+      itemCount: cards.length,
+      itemBuilder: (context, index) {
+        return FeeOptionCard(
+          month: cards[index].month,
+          percentage: cards[index].percentage,
+          amount: cards[index].amount,
+          isSelected: _selectedIndex == index,
+          onTap: () {
+            setState(() {
+              _selectedIndex = index;
+            });
           },
-        )),
-      ]),
-    );
+        );
+      },
+    ));
   }
 }

@@ -4,7 +4,7 @@ import "package:flutter/material.dart";
 
 class FirestoreService {
   final CollectionReference userRolesCollection =
-      FirebaseFirestore.instance.collection('userRoles');
+      FirebaseFirestore.instance.collection('users');
 
   Future<void> setUserRole(String uid, String role) async {
     await userRolesCollection.doc(uid).set({'role': role});

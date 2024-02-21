@@ -15,19 +15,23 @@ class Donationtype extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8.0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Text(
-              "Donation options Available -",
-              style: TextStyle(
-                  fontFamily: 'Niramit',
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold),
+            SizedBox(
+              width: double.infinity,
+              child: Text(
+                "Donation options Available -",
+                style: TextStyle(
+                    fontFamily: 'Niramit',
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold),
+              ),
             ),
             SizedBox(
               height: 24,
             ),
-            SingleChildScrollView(child: FeeOptionList())
+            Expanded(child: FeeOptionList()),
           ],
         ),
       ),

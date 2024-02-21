@@ -1,34 +1,30 @@
 import "package:flutter/material.dart";
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gscapp/Donor/screens/home/helpers/datafetch.dart';
+import 'package:gscapp/provider/student_dataprovider.dart';
 import 'package:gscapp/utils/constants/colors.dart';
 import 'package:gscapp/Donor/screens/home/widgets/horizontal_scroll_complete.dart';
 import 'package:gscapp/Donor/screens/home/widgets/top_carousel.dart';
 import 'package:gscapp/Donor/screens/home/widgets/urgentScroll.dart';
 
-class HomePage extends StatefulWidget {
+class HomePage extends ConsumerStatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  ConsumerState<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends ConsumerState<HomePage> {
   Map<String, dynamic> studentData = {};
-  fetchData _fetchData = fetchData();
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    fetchAndSetStudentData();
-  }
-
-  Future<void> fetchAndSetStudentData() async {
-    Map<String, dynamic> data = await _fetchData.fetchStudentData();
-    setState(() {
-      studentData = data;
-      print(data);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ref.read(studentProvider.notifier).fetchData();
     });
+    print("INit pe hi hua sirf");
   }
 
   @override
@@ -87,7 +83,7 @@ class _HomePageState extends State<HomePage> {
                 height: 8,
               ),
 
-              UrgentScroll(studentData: studentData,),
+              UrgentScroll(),
 
               SizedBox(
                 height: 16,
@@ -115,9 +111,7 @@ class _HomePageState extends State<HomePage> {
                 height: 8,
               ),
 
-              UrgentScroll(
-                studentData: studentData,
-              ),
+              UrgentScroll(),
 
               SizedBox(
                 height: 8,

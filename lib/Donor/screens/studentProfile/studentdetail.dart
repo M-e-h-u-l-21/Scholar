@@ -3,8 +3,8 @@ import "package:gscapp/utils/constants/colors.dart";
 import "package:gscapp/utils/constants/device_utility.dart";
 
 class Studentdetail extends StatelessWidget {
-  const Studentdetail({Key? key}) : super(key: key);
-
+  Studentdetail({Key? key, required this.stuname}) : super(key: key);
+  String stuname;
   @override
   Widget build(BuildContext context) {
     final height = TDeviceUtils.getScreenHeight(context);
@@ -25,35 +25,50 @@ class Studentdetail extends StatelessWidget {
                   color: ThemeColors.deepblue,
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.all(16.0),
+                  padding: const EdgeInsets.all(4.0),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         // Back button , image , info
                         children: [
-                          Container(
-                            width: 30,
-                            height: 30,
-                            color: Colors.white,
+                          IconButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            icon: Icon(
+                              Icons.keyboard_arrow_left,
+                              color: Colors.white,
+                              size: 24,
+                            ),
                           ),
-                          Container(
-                            width: 100,
-                            height: height * 0.135,
-                            color: Colors.white,
+                          SizedBox(
+                            width: width * 0.22,
                           ),
-                          Container(
-                            width: 30,
-                            height: 30,
-                            color: Colors.white,
+                          Image(
+                            image: AssetImage(
+                              'assets/images/man.png',
+                            ),
+                            height: 128,
+                            width: 128,
+                          ),
+                          SizedBox(
+                            width: width * 0.21,
+                          ),
+                          IconButton(
+                            icon: Icon(
+                              Icons.info_rounded,
+                              color: Colors.white,
+                              size: 24,
+                            ),
+                            onPressed: () {},
                           ),
                         ],
                       ),
                       //Name of the kid
                       Text(
-                        "Ronit Gupta",
+                        stuname,
                         style: TextStyle(color: Colors.white, fontSize: 18),
                       )
                     ],
