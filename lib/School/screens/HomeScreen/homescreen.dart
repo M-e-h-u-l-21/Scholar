@@ -1,6 +1,7 @@
 import "package:cloud_firestore/cloud_firestore.dart";
 import "package:firebase_auth/firebase_auth.dart";
 import "package:flutter/material.dart";
+import "package:flutter_riverpod/flutter_riverpod.dart";
 import 'package:gscapp/Authentication/screens/landingPage.dart';
 import 'package:gscapp/Authentication/screens/signinscreen.dart';
 import "package:gscapp/School/model/student.dart";
@@ -9,61 +10,63 @@ import "package:gscapp/School/screens/HomeScreen/widgets/stats_container.dart";
 import "package:gscapp/School/screens/HomeScreen/widgets/studentprofilecard.dart";
 import "package:gscapp/School/screens/NewStudent/newStudent.dart";
 import "package:gscapp/School/screens/NewStudent/services/firebase_services.dart";
+import "package:gscapp/School/screens/StudentProfile/studentprofile.dart";
+import "package:gscapp/provider/school_studentdataprovider.dart";
+import "package:gscapp/provider/schooldataprovider.dart";
+import "package:gscapp/provider/student_dataprovider.dart";
 import "package:gscapp/utils/constants/colors.dart";
 import "package:gscapp/utils/constants/device_utility.dart";
 
-class Homescreen extends StatefulWidget {
+class Homescreen extends ConsumerStatefulWidget {
   const Homescreen({Key? key}) : super(key: key);
 
   @override
-  State<Homescreen> createState() => _HomescreenState();
+  ConsumerState<Homescreen> createState() => _HomescreenState();
 }
 
-class _HomescreenState extends State<Homescreen> {
-  FirebaseService _firebaseService = FirebaseService();
-  fetchData _fetchData = fetchData();
+class _HomescreenState extends ConsumerState<Homescreen> {
   User? user = FirebaseAuth.instance.currentUser;
-  Map<String, dynamic> studentData = {};
   @override
   void initState() {
     super.initState();
-    fetchAndSetStudentData();
-  }
-
-  Future<void> fetchAndSetStudentData() async {
-    Map<String, dynamic> data = await _fetchData.fetchStudentData();
-    setState(() {
-      studentData = data;
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ref.read(schoolDataProvider.notifier).fetchStudentData();
+    });
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ref.read(studentProvider.notifier).fetchData();
+    });
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ref.read(schoolData.notifier).getSchoolData();
     });
   }
 
-  void updateStudentData(Student student) async {
-    await _firebaseService.createStudent(
-        student.name,
-        student.standard,
-        student.fathersName,
-        student.fathersOccupation,
-        student.mothersOccupation,
-        student.annualIncome,
-        student.numFamMembers,
-        student.schoolName,
-        student.scholarNo,
-        student.address,
-        student.stuContactNo,
-        student.guardContactNo,
-        context);
+  // void updateStudentData(Student student) async {
+  //   await _firebaseService.createStudent(
+  //       student.name,
+  //       student.standard,
+  //       student.fathersName,
+  //       student.fathersOccupation,
+  //       student.mothersOccupation,
+  //       student.annualIncome,
+  //       student.numFamMembers,
+  //       student.schoolName,
+  //       student.scholarNo,
+  //       student.address,
+  //       student.stuContactNo,
+  //       student.guardContactNo,
+  //       context);
 
-    Map<String, dynamic> data = await _fetchData.fetchStudentData();
+  //   // Map<String, dynamic> data = await _fetchData.fetchStudentData();
 
-    setState(() {
-      studentData = data; //Ye change krna padega
-      print("Ye pehle ho gya");
-    });
-    
-  }
+  //   setState(() {
+  //     // studentData = data; //Ye change krna padega
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
+    final studentData = ref.watch(schoolDataProvider);
+    print(studentData);
     final double height = TDeviceUtils.getScreenHeight(context);
     final double width = TDeviceUtils.getScreenWidth(context);
 
@@ -92,8 +95,7 @@ class _HomescreenState extends State<Homescreen> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => NewStudent(
-                          updateStudentDataCallback: updateStudentData),
+                      builder: (context) => NewStudent(),
                     ));
               },
               icon: Icon(
@@ -165,10 +167,19 @@ class _HomescreenState extends State<Homescreen> {
                                     studentData.keys.elementAt(index);
                                 Map<String, dynamic> studentInfo =
                                     studentData[studentId];
-                                return StudentProfileCard(
-                                    name: studentInfo['studentname'],
-                                    verifiedBy: "",
-                                    verifiedOn: "");
+                                return InkWell(
+                                    onTap: () {
+                                      Navigator.of(context)
+                                          .push(MaterialPageRoute(
+                                        builder: (context) => Studentprofile(
+                                          name: studentInfo['studentname'],
+                                        ),
+                                      ));
+                                    },
+                                    child: StudentProfileCard(
+                                        name: studentInfo['studentname'],
+                                        verifiedBy: "",
+                                        verifiedOn: ""));
                               }),
                           GridView.builder(
                               gridDelegate:

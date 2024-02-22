@@ -1,6 +1,7 @@
 import "package:flutter/material.dart";
 import 'package:gscapp/Donor/screens/donationtype/screens/donationtype.dart';
-import 'package:gscapp/Donor/screens/studentProfile/studentdetail.dart';
+import 'package:gscapp/Donor/screens/studentProfile/studentprofile.dart';
+import 'package:gscapp/Donor/screens/urgentStudent/urgentStudent.dart';
 import 'package:gscapp/utils/constants/device_utility.dart';
 
 class CardView extends StatelessWidget {
@@ -16,8 +17,8 @@ class CardView extends StatelessWidget {
       onTap: () => Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (context) => Studentdetail(
-                    stuname: studentName,
+              builder: (context) => Studentprofile(
+                  // stuname: studentName,
                   ))),
       child: Padding(
         padding: const EdgeInsets.all(8.0),

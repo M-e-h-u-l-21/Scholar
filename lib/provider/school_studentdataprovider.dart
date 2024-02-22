@@ -4,8 +4,8 @@ import "package:flutter_riverpod/flutter_riverpod.dart";
 import "package:gscapp/School/model/student.dart";
 import "package:flutter/material.dart";
 
-class schoolDataNotifier extends StateNotifier<Map<String, dynamic>> {
-  schoolDataNotifier() : super({});
+class schoolStudentDataNotifier extends StateNotifier<Map<String, dynamic>> {
+  schoolStudentDataNotifier() : super({});
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   late List<dynamic> studentRefs;
   DocumentReference? studentRef;
@@ -51,6 +51,7 @@ class schoolDataNotifier extends StateNotifier<Map<String, dynamic>> {
           .doc(student.name)
           .set(student.toMap());
       studentRef = _firestore.collection('students').doc(student.name);
+      state = {...state, student.name: student.toMap()};
       return true;
     } catch (e) {
       print("Error while adding student:${e}");
@@ -112,6 +113,7 @@ class schoolDataNotifier extends StateNotifier<Map<String, dynamic>> {
   }
 }
 
-final schoolDataProvider = StateNotifierProvider((ref) {
-  return schoolDataNotifier();
+final schoolDataProvider =
+    StateNotifierProvider<schoolStudentDataNotifier, Map<String, dynamic>>((ref) {
+  return schoolStudentDataNotifier();
 });

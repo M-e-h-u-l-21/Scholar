@@ -1,22 +1,21 @@
-import "package:firebase_auth/firebase_auth.dart";
 import "package:flutter/material.dart";
-import "package:gscapp/School/model/student.dart";
-import "package:gscapp/School/screens/NewStudent/helper/firebasehelper.dart";
-import "package:gscapp/School/screens/NewStudent/services/firebase_services.dart";
+import "package:flutter_riverpod/flutter_riverpod.dart";
 import "package:gscapp/School/screens/NewStudent/widgets/formfield.dart";
 import "package:gscapp/School/screens/NewStudent/widgets/uploadfield.dart";
+import "package:gscapp/provider/school_studentdataprovider.dart";
+import "package:gscapp/provider/schooldataprovider.dart";
 import "package:gscapp/utils/constants/colors.dart";
 import "package:gscapp/utils/constants/device_utility.dart";
 
-class NewStudent extends StatefulWidget {
-  final void Function(Student)? updateStudentDataCallback;
-  const NewStudent({Key? key, required this.updateStudentDataCallback, })
-      : super(key: key);
+class NewStudent extends ConsumerStatefulWidget {
+  const NewStudent({
+    Key? key,
+  }) : super(key: key);
   @override
-  State<NewStudent> createState() => _NewStudentState();
+  ConsumerState<NewStudent> createState() => _NewStudentState();
 }
 
-class _NewStudentState extends State<NewStudent> {
+class _NewStudentState extends ConsumerState<NewStudent> {
   String _studentname = "";
   late int grade = 0; //TODO: Fix this 0 initialisation
   late int scholarNo = 0;
@@ -29,15 +28,11 @@ class _NewStudentState extends State<NewStudent> {
   late int stucontactno = 0;
   late int guardcontactno = 0;
 
-  final FirebaseService _firebaseService = FirebaseService();
-  final FirebaseHelper _firebaseHelper = FirebaseHelper();
-
   @override
   Widget build(BuildContext context) {
+    final schoolName = ref.read(schoolData.notifier).getSchoolName();
     final width = TDeviceUtils.getScreenWidth(context);
     final height = TDeviceUtils.getScreenHeight(context);
-    User? user =
-        FirebaseAuth.instance.currentUser; //Fix this , use state management
 
     return Scaffold(
       backgroundColor: ThemeColors.scaffold,
@@ -210,19 +205,22 @@ class _NewStudentState extends State<NewStudent> {
                 ],
               ),
               TextButton(
-                  onPressed: () => widget.updateStudentDataCallback!(Student(
-                      name: _studentname,
-                      standard: grade,
-                      fathersName: _fatherName,
-                      fathersOccupation: _fatheroccupation,
-                      mothersOccupation: _motheroccuptation,
-                      annualIncome: annualincome,
-                      numFamMembers: famcount,
-                      schoolName: "",
-                      scholarNo: scholarNo,
-                      address: _address,
-                      stuContactNo: stucontactno,
-                      guardContactNo: guardcontactno)),
+                  onPressed: () => ref
+                      .read(schoolDataProvider.notifier)
+                      .createStudent(
+                          _studentname,
+                          grade,
+                          _fatherName,
+                          _fatheroccupation,
+                          _motheroccuptation,
+                          annualincome,
+                          famcount,
+                          schoolName,
+                          scholarNo,
+                          _address,
+                          stucontactno,
+                          guardcontactno,
+                          context),
                   child: Text("Submit Application"))
             ],
           ),

@@ -1,6 +1,7 @@
 import "package:flutter/material.dart";
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gscapp/Donor/screens/home/helpers/datafetch.dart';
+import 'package:gscapp/provider/school_studentdataprovider.dart';
 import 'package:gscapp/provider/student_dataprovider.dart';
 import 'package:gscapp/utils/constants/colors.dart';
 import 'package:gscapp/Donor/screens/home/widgets/horizontal_scroll_complete.dart';
@@ -24,7 +25,9 @@ class _HomePageState extends ConsumerState<HomePage> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       ref.read(studentProvider.notifier).fetchData();
     });
-    print("INit pe hi hua sirf");
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ref.read(schoolDataProvider.notifier).fetchStudentData();
+    });
   }
 
   @override

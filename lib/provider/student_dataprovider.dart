@@ -17,7 +17,6 @@ class studentDataNotifier extends StateNotifier<Map<String, dynamic>> {
     print(studentDataMap);
     return studentDataMap;
   }
-
 }
 
 final studentProvider =
