@@ -18,7 +18,7 @@ class CardView extends StatelessWidget {
           context,
           MaterialPageRoute(
               builder: (context) => Studentprofile(
-                  // stuname: studentName,
+                    name: studentName,
                   ))),
       child: Padding(
         padding: const EdgeInsets.all(8.0),

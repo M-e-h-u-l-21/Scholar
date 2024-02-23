@@ -5,12 +5,21 @@ import "package:gscapp/School/model/student.dart";
 import "package:flutter/material.dart";
 
 class schoolStudentDataNotifier extends StateNotifier<Map<String, dynamic>> {
+
+
   schoolStudentDataNotifier() : super({});
+
+
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-  late List<dynamic> studentRefs;
+
+  List<dynamic>? studentRefs;
+
   DocumentReference? studentRef;
+
   User? user = FirebaseAuth.instance.currentUser;
+
   Future<Map<String, dynamic>> fetchStudentData() async {
+
     Map<String, dynamic> studentDataMap = {};
 
     DocumentReference schoolRef =
@@ -25,8 +34,8 @@ class schoolStudentDataNotifier extends StateNotifier<Map<String, dynamic>> {
       studentRefs = schoolData['students'];
     }
 
-    if (studentRefs != null && studentRefs.isNotEmpty) {
-      for (DocumentReference studentRef in studentRefs) {
+    if (studentRefs != null && studentRefs!.isNotEmpty) {
+      for (DocumentReference studentRef in studentRefs!) {
         DocumentSnapshot studentDoc = await studentRef.get();
         if (studentDoc.exists) {
           Map<String, dynamic>? studentData =
@@ -38,7 +47,8 @@ class schoolStudentDataNotifier extends StateNotifier<Map<String, dynamic>> {
         }
       }
     } else {
-      print('No students found');
+      // print("YAHAN KAISE AAYAAAAAAAA");
+      // print('No students found');
     }
     state = studentDataMap;
     return studentDataMap;
@@ -65,7 +75,7 @@ class schoolStudentDataNotifier extends StateNotifier<Map<String, dynamic>> {
       await _firestore.collection('schools').doc(uid).update({
         'students': FieldValue.arrayUnion([studentRef]),
       });
-      print("Ye pehle ho jaana chahiye");
+      // print("Ye pehle ho jaana chahiye");
     } catch (e) {
       print('Error adding student to school: $e');
       throw e;
@@ -114,6 +124,7 @@ class schoolStudentDataNotifier extends StateNotifier<Map<String, dynamic>> {
 }
 
 final schoolDataProvider =
-    StateNotifierProvider<schoolStudentDataNotifier, Map<String, dynamic>>((ref) {
+    StateNotifierProvider<schoolStudentDataNotifier, Map<String, dynamic>>(
+        (ref) {
   return schoolStudentDataNotifier();
 });

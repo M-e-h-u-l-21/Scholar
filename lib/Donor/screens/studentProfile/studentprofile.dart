@@ -1,20 +1,50 @@
 import "package:flutter/material.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
+import "package:gscapp/Donor/screens/studentProfile/widgets/donationSelectModalSheet.dart";
 import "package:gscapp/Donor/screens/urgentStudent/widgets/studentInfoBar.dart";
 import "package:gscapp/Donor/screens/urgentStudent/widgets/studentInfoCard.dart";
 import "package:gscapp/Donor/screens/urgentStudent/widgets/studentPOV.dart";
 import "package:gscapp/Donor/screens/urgentStudent/widgets/teacherremark.dart";
+import "package:gscapp/School/screens/StudentProfile/widgets/requirementrow.dart";
 import "package:gscapp/provider/student_dataprovider.dart";
 import "package:gscapp/utils/constants/colors.dart";
 import "package:gscapp/utils/constants/device_utility.dart";
 
-class Studentprofile extends ConsumerWidget {
-  const Studentprofile({Key? key}) : super(key: key);
+class Studentprofile extends ConsumerStatefulWidget {
+  //TODO : Page Restructuring that looks good
+  const Studentprofile({super.key, required this.name});
+  final String name;
+  @override
+  _StudentprofileState createState() => _StudentprofileState();
+}
+
+class _StudentprofileState extends ConsumerState<Studentprofile> {
+  void _toggleBottomSheet() {
+    showModalBottomSheet(
+        context: context,
+        // constraints: BoxConstraints.expand(width: double.infinity),
+        builder: (ctx) {
+          return Wrap(children: [
+            DonationSelectModalSheet(
+              name: widget.name,
+            ),
+          ]);
+        });
+  }
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
+    final name = widget.name;
+
+    final data = ref.watch(studentProvider);
+    final studentinfo = {name: data[name]};
     final height = TDeviceUtils.getScreenHeight(context);
     final width = TDeviceUtils.getScreenWidth(context);
+    // final requirements = studentinfo[name]['requirements'] ;
+    final requirements = (studentinfo[name]['requirements'] as List)
+        .where((req) => req['isFulfilled'] == false)
+        .toList();
+    print(requirements);
     return SafeArea(
       child: Scaffold(
         backgroundColor: ThemeColors.scaffold,
@@ -57,51 +87,18 @@ class Studentprofile extends ConsumerWidget {
               padding: const EdgeInsets.only(left: 12.0, right: 12),
               child: Container(
                   child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Icon(
-                          Icons.circle,
-                          size: 10,
-                        ),
-                        Text("Semester Fee"),
-                        Text("-"),
-                        Text("4000"),
-                        Text("(for October Month)")
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Icon(
-                          Icons.circle,
-                          size: 10,
-                        ),
-                        Text("Semester Fee"),
-                        Text("-"),
-                        Text("4000"),
-                        Text("(for October Month)")
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Icon(
-                          Icons.circle,
-                          size: 10,
-                        ),
-                        Text("Semester Fee"),
-                        Text("-"),
-                        Text("4000"),
-                        Text("(for October Month)")
-                      ],
-                    )
-                  ],
-                ),
-              )),
+                      padding: const EdgeInsets.all(8.0),
+                      child: ListView.builder(
+                        shrinkWrap: true,
+                        itemCount:
+                            requirements != null ? requirements.length : 0,
+                        itemBuilder: (context, index) {
+                          return Requirementrow(
+                              title: requirements[index]['title'],
+                              amount: requirements[index]['amount'],
+                              description: requirements[index]['description']);
+                        },
+                      ))),
             ),
 
             Padding(
@@ -135,8 +132,8 @@ class Studentprofile extends ConsumerWidget {
               height: 18,
             ),
             TextButton(
-              onPressed: () {},
-              child: Text("Donate Now"),
+              onPressed: _toggleBottomSheet,
+              child: Text("Support Now"),
             )
           ]),
         ),

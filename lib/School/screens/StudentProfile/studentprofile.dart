@@ -4,20 +4,45 @@ import "package:gscapp/Donor/screens/urgentStudent/widgets/studentInfoBar.dart";
 import "package:gscapp/Donor/screens/urgentStudent/widgets/studentInfoCard.dart";
 import "package:gscapp/Donor/screens/urgentStudent/widgets/studentPOV.dart";
 import "package:gscapp/Donor/screens/urgentStudent/widgets/teacherremark.dart";
+import "package:gscapp/School/model/studentRequirement.dart";
+import "package:gscapp/School/screens/StudentProfile/widgets/requirementrow.dart";
+import 'package:gscapp/School/screens/StudentProfile/widgets/requirementsBottomSheet.dart';
 import "package:gscapp/provider/student_dataprovider.dart";
 import "package:gscapp/utils/constants/colors.dart";
 import "package:gscapp/utils/constants/device_utility.dart";
 
-class Studentprofile extends ConsumerWidget {
+class Studentprofile extends ConsumerStatefulWidget {
   const Studentprofile({super.key, required this.name});
 
   final String name;
+
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  _StudentprofileState createState() => _StudentprofileState();
+}
+
+class _StudentprofileState extends ConsumerState<Studentprofile> {
+  void _openBottomModal() {
+    showModalBottomSheet(
+      context: context,
+      builder: (ctx) => Wrap(children: [
+        RequirementsBottomSheet(
+          name: widget.name,
+        )
+      ]),
+      // constraints:
+      //     BoxConstraints.expand(width: TDeviceUtils.getScreenWidth(context))
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final name = widget.name;
     final height = TDeviceUtils.getScreenHeight(context);
     final width = TDeviceUtils.getScreenWidth(context);
-    final data = ref.read(studentProvider);
+    final data = ref.watch(studentProvider);
     final studentinfo = {name: data[name]};
+    // print("#########${studentinfo[name]['requirements']}#############");
+    final requirements = studentinfo[name]['requirements'];
     return SafeArea(
       child: Scaffold(
         backgroundColor: ThemeColors.scaffold,
@@ -57,9 +82,7 @@ class Studentprofile extends ConsumerWidget {
                             fontWeight: FontWeight.bold, fontSize: 24),
                       ),
                       IconButton(
-                          onPressed: () {
-                           
-                          },
+                          onPressed: _openBottomModal,
                           icon: Icon(
                             Icons.edit,
                           ))
@@ -69,51 +92,18 @@ class Studentprofile extends ConsumerWidget {
                 padding: const EdgeInsets.only(left: 12.0, right: 12),
                 child: Container(
                     child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Icon(
-                            Icons.circle,
-                            size: 10,
-                          ),
-                          Text("Semester Fee"),
-                          Text("-"),
-                          Text("4000"),
-                          Text("(for October Month)")
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Icon(
-                            Icons.circle,
-                            size: 10,
-                          ),
-                          Text("Semester Fee"),
-                          Text("-"),
-                          Text("4000"),
-                          Text("(for October Month)")
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Icon(
-                            Icons.circle,
-                            size: 10,
-                          ),
-                          Text("Semester Fee"),
-                          Text("-"),
-                          Text("4000"),
-                          Text("(for October Month)")
-                        ],
-                      )
-                    ],
-                  ),
-                )),
+                        padding: const EdgeInsets.all(8.0),
+                        child: ListView.builder(
+                          shrinkWrap: true,
+                          itemCount: requirements.length,
+                          itemBuilder: (context, index) {
+                            return Requirementrow(
+                                title: requirements[index]['title'],
+                                amount: requirements[index]['amount'],
+                                description: requirements[index]
+                                    ['description']);
+                          },
+                        ))),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),

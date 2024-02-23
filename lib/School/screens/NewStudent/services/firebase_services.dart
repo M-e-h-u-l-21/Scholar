@@ -28,7 +28,7 @@ class FirebaseService {
       await _firestore.collection('schools').doc(uid).update({
         'students': FieldValue.arrayUnion([studentRef]),
       });
-      print("Ye pehle ho jaana chahiye");
+      // print("Ye pehle ho jaana chahiye");
     } catch (e) {
       print('Error adding student to school: $e');
       throw e;

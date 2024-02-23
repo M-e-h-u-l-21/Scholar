@@ -3,7 +3,10 @@ import "package:gscapp/utils/constants/device_utility.dart";
 
 class StudentProfileCard extends StatelessWidget {
   const StudentProfileCard({
-    super.key, required this.name, required this.verifiedBy, required this.verifiedOn,
+    super.key,
+    required this.name,
+    required this.verifiedBy,
+    required this.verifiedOn,
   });
 
   final String name;

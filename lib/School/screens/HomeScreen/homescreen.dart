@@ -5,7 +5,6 @@ import "package:flutter_riverpod/flutter_riverpod.dart";
 import 'package:gscapp/Authentication/screens/landingPage.dart';
 import 'package:gscapp/Authentication/screens/signinscreen.dart';
 import "package:gscapp/School/model/student.dart";
-import 'package:gscapp/School/screens/HomeScreen/services/fetchData.dart';
 import "package:gscapp/School/screens/HomeScreen/widgets/stats_container.dart";
 import "package:gscapp/School/screens/HomeScreen/widgets/studentprofilecard.dart";
 import "package:gscapp/School/screens/NewStudent/newStudent.dart";
@@ -66,7 +65,7 @@ class _HomescreenState extends ConsumerState<Homescreen> {
   @override
   Widget build(BuildContext context) {
     final studentData = ref.watch(schoolDataProvider);
-    print(studentData);
+    // print(studentData);
     final double height = TDeviceUtils.getScreenHeight(context);
     final double width = TDeviceUtils.getScreenWidth(context);
 

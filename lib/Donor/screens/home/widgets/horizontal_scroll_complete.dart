@@ -1,6 +1,5 @@
 import "package:flutter/material.dart";
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:gscapp/Donor/providers/studentDataProvider.dart';
 import 'package:gscapp/Donor/screens/home/widgets/horizontal_scroll_row.dart';
 
 class HorizontalScroll extends ConsumerWidget {
