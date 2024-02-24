@@ -1,23 +1,23 @@
 class studentRequirement {
   final String title;
-  final String amount;
-  final String date;
+  final int amount;
+  final DateTime deadline;
   final String description;
   bool isFulfilled = false;
 
   studentRequirement(
       {required this.title,
-      required this.amount,
-      required this.date,
-      required this.description});
+      required this.deadline,
+      required this.description,
+      required this.amount});
 
   Map<String, dynamic> toMap() {
     return {
       'title': title,
       'amount': amount,
-      'date': description,
+      'date': deadline,
       'description': description,
-      'isFulfilled' : false,
+      'isFulfilled': false,
     };
   }
 }

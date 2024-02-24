@@ -46,7 +46,7 @@ class CardContainer extends StatelessWidget {
             ),
             SizedBox(
               child: Text(
-                amount.toString(),
+                "₹${amount.toString()}",
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
               width: MediaQuery.of(context).size.width * 0.13,

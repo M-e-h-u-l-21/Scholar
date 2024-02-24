@@ -8,13 +8,17 @@ class DetailCard extends StatelessWidget {
   final String title;
 
   RegExp uniformRegex = RegExp(r'uniform', caseSensitive: false);
-  RegExp semesterFeeRegex = RegExp(r'semester fee', caseSensitive: false);
+  RegExp semesterFeeRegexA =
+      RegExp(r'schoola semester fee', caseSensitive: false);
+  RegExp semesterFeeRegexB =
+      RegExp(r'schoolb semester fee', caseSensitive: false);
   RegExp stationaryRegex = RegExp(r'stationary', caseSensitive: false);
 
   @override
   Widget build(BuildContext context) {
     bool uniform = uniformRegex.hasMatch(title);
-    bool semesterFee = semesterFeeRegex.hasMatch(title);
+    bool semesterFeeA = semesterFeeRegexA.hasMatch(title);
+    bool semesterFeeB = semesterFeeRegexB.hasMatch(title);
     bool stationary = stationaryRegex.hasMatch(title);
 
     return Padding(
@@ -22,14 +26,22 @@ class DetailCard extends StatelessWidget {
       child: Container(
           child: uniform
               ? UniformDetail(title: title)
-              : (semesterFee
-                  ? SemesterFeeDetail(title: title)
-                  : Column(
-                      children: [
-                        //Stationary ki rendering
-                        Row()
-                      ],
-                    ))),
+              : (semesterFeeA
+                  ? SemesterFeeDetail(
+                      title: title,
+                      isA: semesterFeeA,
+                    )
+                  : semesterFeeB
+                      ? SemesterFeeDetail(
+                          title: title,
+                          isA: semesterFeeA,
+                        )
+                      : Column(
+                          children: [
+                            //Stationary ki rendering
+                            Row()
+                          ],
+                        ))),
     );
   }
 }

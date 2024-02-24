@@ -8,6 +8,7 @@ import 'package:gscapp/utils/constants/colors.dart';
 import 'package:gscapp/Donor/screens/home/widgets/horizontal_scroll_complete.dart';
 import 'package:gscapp/Donor/screens/home/widgets/top_carousel.dart';
 import 'package:gscapp/Donor/screens/home/widgets/urgentScroll.dart';
+import 'package:simple_fx/simple_fx.dart';
 
 class HomePage extends ConsumerStatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -47,8 +48,66 @@ class _HomePageState extends ConsumerState<HomePage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              SizedBox(
+                height: 16,
+              ),
               //Banner
-              Carousel(),
+              Container(
+                  height: 180,
+                  clipBehavior: Clip.hardEdge,
+                  decoration:
+                      BoxDecoration(borderRadius: BorderRadius.circular(8)),
+                  width: double.infinity,
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      Positioned.fill(
+                        child: SimpleFX(
+                          imageSource: Image(
+                            image: AssetImage('assets/images/hope.jpg'),
+                            height: 180,
+                            fit: BoxFit.cover,
+                          ),
+                          brightness: -5,
+                        ),
+                      ),
+                      Positioned(
+                        bottom: 0,
+                        left: 0,
+                        child: Container(
+                          padding: EdgeInsets.all(8.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Read more about',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 24.0,
+                                    fontWeight: FontWeight.w700),
+                              ),
+                              Text("Our Success stories",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 24.0,
+                                      fontWeight: FontWeight.w700))
+                            ],
+                          ),
+                        ),
+                      ),
+                      Positioned(
+                          bottom: 0,
+                          right: 0,
+                          child: IconButton(
+                            onPressed: () {},
+                            icon: Icon(
+                              Icons.arrow_right,
+                              color: Colors.white,
+                              size: 50,
+                            ),
+                          ))
+                    ],
+                  )),
 
               SizedBox(
                 height: 16,

@@ -18,7 +18,8 @@ class studentDataNotifier extends StateNotifier<Map<String, dynamic>> {
       studentDataMap[doc.id] = doc.data();
     });
     state = studentDataMap;
-    print(studentDataMap);
+    // print(studentDataMap);
+    // print(state);
     return studentDataMap;
   }
 
@@ -46,7 +47,8 @@ class studentDataNotifier extends StateNotifier<Map<String, dynamic>> {
     return false;
   }
 
-  Future<bool> requirementMet(List<int> index, String studentName) async {
+  Future<bool> requirementMet(
+      List<int> index, String studentName, num amount) async {
     try {
       final DocumentReference studentRef =
           FirebaseFirestore.instance.collection("students").doc(studentName);
@@ -60,9 +62,8 @@ class studentDataNotifier extends StateNotifier<Map<String, dynamic>> {
 
         if (studentData != null && studentData.containsKey('requirements')) {
           data = studentData['requirements'];
-
+          Map<String, dynamic> arr = {};
           for (int indexes in index) {
-
             Map<String, dynamic> mapToUpdate = data[indexes];
 
             mapToUpdate['isFulfilled'] = true;
@@ -72,11 +73,10 @@ class studentDataNotifier extends StateNotifier<Map<String, dynamic>> {
             data.insert(data.length, mapToUpdate);
             await studentRef.update({'requirements': data});
             fetchData();
-            final Map<String, dynamic> arr = {...data[indexes]};
-            await userDataNotifier()
-                .addRequirementToUser(studentName, arr, 10000);
-                
+            arr = {...data[indexes]};
           }
+          await userDataNotifier()
+              .addRequirementToUser(studentName, arr, amount);
 
           print('isMet field updated successfully.');
         }

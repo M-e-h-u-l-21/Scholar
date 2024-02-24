@@ -1,10 +1,13 @@
 import "package:flutter/material.dart";
 
 class HorizontalScrollItem extends StatelessWidget {
-  const HorizontalScrollItem({Key? key, required this.title, required this.imageUrl}) : super(key: key);
+  const HorizontalScrollItem(
+      {Key? key, required this.title, required this.imageUrl, required this.size})
+      : super(key: key);
 
   final String title;
   final String imageUrl;
+  final int size;
 
   @override
   Widget build(BuildContext context) {
@@ -14,8 +17,8 @@ class HorizontalScrollItem extends StatelessWidget {
         children: [
           Image(
             image: AssetImage(imageUrl),
-            height: 60,
-            width: 60,
+            height: size.toDouble(),
+            width: size.toDouble(),
           ),
           Text(
             title,

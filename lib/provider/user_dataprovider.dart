@@ -21,7 +21,7 @@ class userDataNotifier extends StateNotifier<Map<String, dynamic>> {
   // }
 
   Future<void> addRequirementToUser(
-      String name, Map<String, dynamic> row, int amount) async {
+      String name, Map<String, dynamic> row, num amount) async {
     try {
       final DocumentReference userRef =
           FirebaseFirestore.instance.collection("users").doc(user!.uid);

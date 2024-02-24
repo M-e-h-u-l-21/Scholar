@@ -1,14 +1,10 @@
-import "package:cloud_firestore/cloud_firestore.dart";
 import "package:firebase_auth/firebase_auth.dart";
 import "package:flutter/material.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
 import 'package:gscapp/Authentication/screens/landingPage.dart';
-import 'package:gscapp/Authentication/screens/signinscreen.dart';
-import "package:gscapp/School/model/student.dart";
 import "package:gscapp/School/screens/HomeScreen/widgets/stats_container.dart";
 import "package:gscapp/School/screens/HomeScreen/widgets/studentprofilecard.dart";
 import "package:gscapp/School/screens/NewStudent/newStudent.dart";
-import "package:gscapp/School/screens/NewStudent/services/firebase_services.dart";
 import "package:gscapp/School/screens/StudentProfile/studentprofile.dart";
 import "package:gscapp/provider/school_studentdataprovider.dart";
 import "package:gscapp/provider/schooldataprovider.dart";

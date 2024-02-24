@@ -18,9 +18,10 @@ class PastContribution extends ConsumerStatefulWidget {
 
 class _PastContributionState extends ConsumerState<PastContribution> {
   User? user = FirebaseAuth.instance.currentUser;
-  String previous = "";
+
   @override
   Widget build(BuildContext context) {
+    String previous = "";
     final height = TDeviceUtils.getScreenHeight(context);
     final data = ref.watch(userData);
 
@@ -67,8 +68,8 @@ class _PastContributionState extends ConsumerState<PastContribution> {
                       itemBuilder: (context, index) {
                         final Timestamp tp = myContributions[index]['date'];
                         String val = formatDate(tp.toDate().toString());
-                        bool prev =
-                            previous == val;
+                        bool prev = (previous == val);
+                        print(previous);
                         previous = val;
                         return PastContributionCard(
                           amount: myContributions[index]['amount'],
@@ -79,7 +80,7 @@ class _PastContributionState extends ConsumerState<PastContribution> {
                       },
                     ),
                   ),
-                ])
+                ]),
               ],
             ),
           )

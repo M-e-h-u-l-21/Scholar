@@ -1,13 +1,20 @@
 import "package:flutter/material.dart";
 import 'package:gscapp/Donor/screens/donationtype/screens/donationtype.dart';
+import 'package:gscapp/Donor/screens/home/makeDonation.dart';
 import 'package:gscapp/Donor/screens/studentProfile/studentprofile.dart';
 import 'package:gscapp/Donor/screens/urgentStudent/urgentStudent.dart';
 import 'package:gscapp/utils/constants/device_utility.dart';
 
 class CardView extends StatelessWidget {
-  CardView({super.key, required this.studentName});
+  CardView(
+      {super.key,
+      required this.studentName,
+      required this.grade,
+      required this.school});
 
   String studentName;
+  int grade;
+  String school;
 
   @override
   Widget build(BuildContext context) {
@@ -34,57 +41,89 @@ class CardView extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Container(
-                        color: Colors.cyan,
-                        height: 100,
-                        width: 100,
+                      Image(
+                        image: AssetImage('assets/images/man.png'),
+                        height: 110,
+                        width: 110,
                       ),
                       SizedBox(
                         height: 12,
                       ),
-                      Text(studentName)
+                      Text(
+                        studentName,
+                        style: TextStyle(
+                            fontWeight: FontWeight.w500, fontSize: 20),
+                      )
                     ],
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "•NTSE Scholar",
-                            style: TextStyle(fontSize: 16),
-                          ),
-                          Text(
-                            "•NSTSE qualified",
-                            style: TextStyle(fontSize: 16),
-                          ),
-                          Text(
-                            "•State level runner",
-                            style: TextStyle(fontSize: 16),
-                          ),
-                          // Text(
-                          //   "•Temp4",
-                          //   style: TextStyle(fontSize: 16),
-                          // ),
-                        ],
-                      ),
-                      TextButton(
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        const Donationtype()));
-                          },
-                          child: Text("Support Now"))
-                    ],
+                  child: SizedBox(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "• Class - ${grade}",
+                              style: TextStyle(
+                                  fontSize: 16, fontWeight: FontWeight.w600),
+                            ),
+                            Text(
+                              "• ${school}",
+                              style: TextStyle(
+                                  fontSize: 16, fontWeight: FontWeight.w600),
+                            ),
+                            SizedBox(
+                              height: 8,
+                            ),
+                            Text(
+                              "Donation Goal - 18000",
+                              style: TextStyle(
+                                  fontSize: 14, fontWeight: FontWeight.w600),
+                            ),
+                            SizedBox(
+                              height: 4,
+                            ),
+                            SizedBox(
+                              width: width * 0.35,
+                              child: LinearProgressIndicator(
+                                value: 0.75,
+                                minHeight: 6,
+                              ),
+                            ),
+                            SizedBox(
+                              height: 4,
+                            ),
+                            Text(
+                              "75% Target reached",
+                              style: TextStyle(
+                                  fontSize: 14, fontWeight: FontWeight.w600),
+                            ),
+                            SizedBox(
+                              height: 8,
+                            ),
+                            // Text(
+                            //   "•Temp4",
+                            //   style: TextStyle(fontSize: 16),
+                            // ),
+                          ],
+                        ),
+                        ElevatedButton(
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const MakeDonation()));
+                            },
+                            child: Text("Support Now"))
+                      ],
+                    ),
                   ),
                 )
               ],

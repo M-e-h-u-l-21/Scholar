@@ -45,3 +45,7 @@ class SchoolB {
 
   static const totalB = 14000;
 }
+
+class Stationary {
+  static const Total = 3000;
+}

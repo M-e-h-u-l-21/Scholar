@@ -95,7 +95,7 @@ class _StudentprofileState extends ConsumerState<Studentprofile> {
                         itemBuilder: (context, index) {
                           return Requirementrow(
                               title: requirements[index]['title'],
-                              amount: requirements[index]['amount'],
+                              amount: requirements[index]['amount'].toString(),
                               description: requirements[index]['description']);
                         },
                       ))),

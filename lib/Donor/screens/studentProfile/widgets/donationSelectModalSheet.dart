@@ -17,10 +17,10 @@ class DonationSelectModalSheet extends ConsumerStatefulWidget {
 
 class _DonationSelectModalSheetState
     extends ConsumerState<DonationSelectModalSheet> {
-  List<int> _selectedCard = [];
-
   @override
   Widget build(BuildContext context) {
+    List<int> _selectedCard = []; // If doesnt work then revert it
+    int total = 0;
     final name = widget.name;
     final data = ref.watch(studentProvider);
     final studentinfo = {name: data[name]};
@@ -63,10 +63,13 @@ class _DonationSelectModalSheetState
                               shrinkWrap: true,
                               itemCount: requirements.length,
                               itemBuilder: (context, index) {
+                                print(requirements[index]['amount']);
+                                // total += int.parse(requirements[index]['amount']) as int;
                                 return Requirementrow(
                                   index: index,
                                   title: requirements[index]['title'],
-                                  amount: requirements[index]['amount'],
+                                  amount:
+                                      requirements[index]['amount'].toString(),
                                   description: requirements[index]
                                       ['description'],
                                   onCheckBoxSelected:

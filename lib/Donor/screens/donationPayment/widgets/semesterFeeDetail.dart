@@ -6,9 +6,11 @@ class SemesterFeeDetail extends StatelessWidget {
   const SemesterFeeDetail({
     super.key,
     required this.title,
+    required this.isA,
   });
 
   final String title;
+  final bool isA;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +24,7 @@ class SemesterFeeDetail extends StatelessWidget {
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
           ),
           Text(
-            "₹${SchoolA.totalA.toString()}",
+            "₹${isA ? SchoolA.totalA.toString() : SchoolB.totalB.toString()}",
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
           ),
         ],
@@ -38,16 +40,22 @@ class SemesterFeeDetail extends StatelessWidget {
         child: Container(
           child: Column(
             children: [
-              CostRow(text1: SchoolA.baseTuitionFee, text2: SchoolA.baseFee),
+              CostRow(
+                  text1: isA ? SchoolA.baseTuitionFee : SchoolB.baseTuitionFee,
+                  text2: isA ? SchoolA.baseFee : SchoolB.baseFee),
               SizedBox(
                 height: 8,
               ),
               CostRow(
-                  text1: SchoolA.baseComputerFee, text2: SchoolA.computerFee),
+                  text1:
+                      isA ? SchoolA.baseComputerFee : SchoolB.baseComputerFee,
+                  text2: isA ? SchoolA.computerFee : SchoolB.computerFee),
               SizedBox(
                 height: 8,
               ),
-              CostRow(text1: SchoolA.baseMedicalFee, text2: SchoolA.medicalFee),
+              CostRow(
+                  text1: isA ? SchoolA.baseMedicalFee : SchoolB.baseMedicalFee,
+                  text2: isA ? SchoolA.medicalFee : SchoolB.medicalFee),
               SizedBox(
                 width: double.infinity,
                 child: Divider(
@@ -66,7 +74,7 @@ class SemesterFeeDetail extends StatelessWidget {
                         style: TextStyle(fontStyle: FontStyle.italic),
                       ),
                       Text(
-                        "₹${SchoolA.totalA.toString()}",
+                        "₹${isA ? SchoolA.totalA.toString() : SchoolB.totalB.toString()}",
                         style: TextStyle(fontStyle: FontStyle.italic),
                       ),
                     ],

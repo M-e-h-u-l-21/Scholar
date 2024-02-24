@@ -7,8 +7,11 @@ import "package:gscapp/provider/student_dataprovider.dart";
 import "package:gscapp/utils/constants/colors.dart";
 
 class DonationDetail extends ConsumerWidget {
-  const DonationDetail(
-      {super.key, required this.selectedIndex, required this.studentName});
+  const DonationDetail({
+    super.key,
+    required this.selectedIndex,
+    required this.studentName,
+  });
   final List<int> selectedIndex;
   final String studentName;
 
@@ -17,6 +20,18 @@ class DonationDetail extends ConsumerWidget {
     final data = ref.watch(studentProvider);
     final studentinfo = {studentName: data[studentName]};
     final List<dynamic> requirements = studentinfo[studentName]['requirements'];
+    num total = 0;
+    for (int i in selectedIndex) {
+      // print(requirements[i]['amount']);
+      print("Type of amount: ${requirements[i]['amount'].runtimeType}");
+      try {
+        total += requirements[i]['amount'];
+        print(total);
+      } catch (e) {
+        print("Error parsing amount: ${requirements[i]['amount']}");
+      }
+    }
+    print(selectedIndex);
 
     return SafeArea(
       child: Scaffold(
@@ -80,7 +95,7 @@ class DonationDetail extends ConsumerWidget {
                       onPressed: () async {
                         await ref
                             .watch(studentProvider.notifier)
-                            .requirementMet(selectedIndex, studentName);
+                            .requirementMet(selectedIndex, studentName, total);
                         const snackbar = SnackBar(
                           content: Text("Donation Completed"),
                         );
@@ -91,7 +106,7 @@ class DonationDetail extends ConsumerWidget {
                               builder: (context) => const Screen(),
                             ));
                       },
-                      child: Text("Donate ₹11600"),
+                      child: Text("Donate ₹${total}"),
                     ))
               ],
             ),

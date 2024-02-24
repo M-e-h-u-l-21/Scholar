@@ -27,7 +27,7 @@ class _NewStudentState extends ConsumerState<NewStudent> {
   late int annualincome = 0;
   late int stucontactno = 0;
   late int guardcontactno = 0;
-
+  
   @override
   Widget build(BuildContext context) {
     final schoolName = ref.read(schoolData.notifier).getSchoolName();

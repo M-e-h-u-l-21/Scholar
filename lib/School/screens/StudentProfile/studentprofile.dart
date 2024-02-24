@@ -4,7 +4,6 @@ import "package:gscapp/Donor/screens/urgentStudent/widgets/studentInfoBar.dart";
 import "package:gscapp/Donor/screens/urgentStudent/widgets/studentInfoCard.dart";
 import "package:gscapp/Donor/screens/urgentStudent/widgets/studentPOV.dart";
 import "package:gscapp/Donor/screens/urgentStudent/widgets/teacherremark.dart";
-import "package:gscapp/School/model/studentRequirement.dart";
 import "package:gscapp/School/screens/StudentProfile/widgets/requirementrow.dart";
 import 'package:gscapp/School/screens/StudentProfile/widgets/requirementsBottomSheet.dart';
 import "package:gscapp/provider/student_dataprovider.dart";
@@ -24,11 +23,15 @@ class _StudentprofileState extends ConsumerState<Studentprofile> {
   void _openBottomModal() {
     showModalBottomSheet(
       context: context,
-      builder: (ctx) => Wrap(children: [
-        RequirementsBottomSheet(
-          name: widget.name,
-        )
-      ]),
+      isScrollControlled: true,
+      builder: (ctx) => Padding(
+        padding: MediaQuery.of(context).viewInsets,
+        child: Wrap(children: [
+          RequirementsBottomSheet(
+            name: widget.name,
+          )
+        ]),
+      ),
       // constraints:
       //     BoxConstraints.expand(width: TDeviceUtils.getScreenWidth(context))
     );
@@ -101,7 +104,8 @@ class _StudentprofileState extends ConsumerState<Studentprofile> {
                           itemBuilder: (context, index) {
                             return Requirementrow(
                                 title: requirements[index]['title'],
-                                amount: requirements[index]['amount'],
+                                amount:
+                                    requirements[index]['amount'].toString(),
                                 description: requirements[index]
                                     ['description']);
                           },

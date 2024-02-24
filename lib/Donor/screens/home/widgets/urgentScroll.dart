@@ -21,7 +21,10 @@ class _UrgentScrollState extends ConsumerState<UrgentScroll> {
       child: Row(
           children: studentData.keys.map((studentId) {
         Map<String, dynamic> studentInfo = studentData[studentId]!;
-        return CardView(studentName: studentInfo['studentname']);
+        return CardView(
+            studentName: studentInfo['studentname'],
+            grade: studentInfo['standard'],
+            school: studentInfo['schoolname']);
       }).toList()
           // CardView(),
           // SizedBox(

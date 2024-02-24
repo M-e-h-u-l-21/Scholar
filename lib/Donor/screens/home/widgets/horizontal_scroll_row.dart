@@ -19,19 +19,43 @@ class HorizontalScrollTab extends StatelessWidget {
                 scrollDirection: Axis.horizontal,
                 child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       HorizontalScrollItem(
-                          title: "School",
-                          imageUrl: 'assets/images/graduation.png'),
-                      HorizontalScrollItem(
+                        title: "School",
+                        imageUrl: 'assets/images/graduation1.png',
+                        size: 60,
+                      ),
+                      SizedBox(
+                        width: 16,
+                      ),
+                      VerticalDivider(),
+                      SizedBox(
+                        width: 16,
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(top: 10.0),
+                        child: HorizontalScrollItem(
                           title: "Location",
-                          imageUrl: 'assets/images/graduation.png'),
-                      HorizontalScrollItem(
-                          title: "Grades",
-                          imageUrl: 'assets/images/graduation.png'),
-                      HorizontalScrollItem(
-                          title: "Profile",
-                          imageUrl: 'assets/images/graduation.png'),
+                          imageUrl: 'assets/images/map.png',
+                          size: 50,
+                        ),
+                      ),
+                      SizedBox(
+                        width: 16,
+                      ),
+                      VerticalDivider(),
+                      SizedBox(
+                        width: 16,
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(top: 10.0),
+                        child: HorizontalScrollItem(
+                          title: "Budget",
+                          imageUrl: 'assets/images/budget.png',
+                          size: 50,
+                        ),
+                      ),
                     ]),
               )
             ],
