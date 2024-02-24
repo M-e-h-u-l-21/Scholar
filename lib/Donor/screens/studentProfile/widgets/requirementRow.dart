@@ -38,6 +38,7 @@ class _RequirementrowState extends State<Requirementrow> {
                 _isSelected = value ?? false;
                 // Call the callback function to notify the parent widget
                 widget.onCheckBoxSelected(widget.index, _isSelected);
+                print(widget.index);
               });
             },
           ),

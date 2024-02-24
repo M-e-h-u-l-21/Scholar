@@ -11,6 +11,7 @@ class HorizontalScroll extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     // final studentData = ref.watch(studentProvider);
     return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Text(
@@ -18,7 +19,7 @@ class HorizontalScroll extends ConsumerWidget {
           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
         ),
         Container(
-          width: MediaQuery.of(context).size.width * 0.72,
+          width: MediaQuery.of(context).size.width * 0.70,
           child: HorizontalScrollTab(),
         )
       ],

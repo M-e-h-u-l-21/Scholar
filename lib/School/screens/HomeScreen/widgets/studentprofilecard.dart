@@ -27,10 +27,10 @@ class StudentProfileCard extends StatelessWidget {
             children: [
               Padding(
                 padding: EdgeInsets.symmetric(),
-                child: Container(
-                  color: Colors.black,
-                  width: width * 0.25,
-                  height: height * 0.09,
+                child: Image(
+                  image: AssetImage('assets/images/man.png'),
+                  width: 80,
+                  height: 80,
                 ),
               ),
               SizedBox(

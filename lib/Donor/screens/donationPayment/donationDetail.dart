@@ -1,7 +1,7 @@
 import "package:flutter/material.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
 import "package:gscapp/Donor/controllers/screen.dart";
-import "package:gscapp/Donor/screens/donation/donationPayment/widgets/detailCard.dart";
+import 'package:gscapp/Donor/screens/donationPayment/widgets/detailCard.dart';
 import "package:gscapp/Donor/screens/home/home_page.dart";
 import "package:gscapp/provider/student_dataprovider.dart";
 import "package:gscapp/utils/constants/colors.dart";

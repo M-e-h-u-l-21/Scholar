@@ -1,6 +1,6 @@
 import "package:flutter/material.dart";
-import "package:gscapp/Donor/screens/donation/donationPayment/widgets/semesterFeeDetail.dart";
-import "package:gscapp/Donor/screens/donation/donationPayment/widgets/uniformdetail.dart";
+import 'package:gscapp/Donor/screens/donationPayment/widgets/semesterFeeDetail.dart';
+import 'package:gscapp/Donor/screens/donationPayment/widgets/uniformdetail.dart';
 
 class DetailCard extends StatelessWidget {
   DetailCard({super.key, required this.title});

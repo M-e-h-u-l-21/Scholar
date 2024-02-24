@@ -1,6 +1,8 @@
 import "package:flutter/material.dart";
+import "package:flutter_riverpod/flutter_riverpod.dart";
+import "package:gscapp/provider/school_studentdataprovider.dart";
 
-class StatsContainer extends StatelessWidget {
+class StatsContainer extends ConsumerWidget {
   const StatsContainer({
     super.key,
     required this.height,
@@ -9,7 +11,8 @@ class StatsContainer extends StatelessWidget {
   final double height;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final data = ref.watch(schoolDataProvider);
     return Container(
       decoration: BoxDecoration(
           color: Color(0X80e9dcc4), borderRadius: BorderRadius.circular(8)),
@@ -40,7 +43,7 @@ class StatsContainer extends StatelessWidget {
                       style: TextStyle(fontSize: 14),
                     ),
                     Text(
-                      "390",
+                      data.length.toString(),
                       style: TextStyle(fontSize: 14),
                     )
                   ],

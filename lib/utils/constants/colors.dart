@@ -16,7 +16,7 @@ class ThemeColors {
   static const Color dark = Color(0xFF272727);
   static const Color primaryBackground = Color(0xFFF3F5FF);
   static const Color lightGreen = Color(0XFFB0FFBD);
-  static const Color darkGreen = Color(0XFF58F158);
+  static const Color darkGreen = Color(0XFF77DD77);
 
   static const Color scaffold = Color(0XFFFFFEF9);
   static const Color deepblue = Color(0XFF161733);

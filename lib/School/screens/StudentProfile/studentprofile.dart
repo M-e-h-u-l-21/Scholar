@@ -42,7 +42,9 @@ class _StudentprofileState extends ConsumerState<Studentprofile> {
     final data = ref.watch(studentProvider);
     final studentinfo = {name: data[name]};
     // print("#########${studentinfo[name]['requirements']}#############");
-    final requirements = studentinfo[name]['requirements'];
+    final requirements = (studentinfo[name]['requirements'] as List)
+        .where((item) => item['isFulfilled'] == false)
+        .toList();
     return SafeArea(
       child: Scaffold(
         backgroundColor: ThemeColors.scaffold,

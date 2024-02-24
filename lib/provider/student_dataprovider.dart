@@ -2,6 +2,7 @@ import "package:cloud_firestore/cloud_firestore.dart";
 import "package:firebase_auth/firebase_auth.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
 import "package:gscapp/School/model/studentRequirement.dart";
+import "package:gscapp/provider/user_dataprovider.dart";
 
 FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 User? user = _firebaseAuth.currentUser;
@@ -45,22 +46,6 @@ class studentDataNotifier extends StateNotifier<Map<String, dynamic>> {
     return false;
   }
 
-  Future<void> addRequirementToUser(
-      String name, Map<String, dynamic> row, int amount) async {
-    try {
-      final DocumentReference userRef =
-          FirebaseFirestore.instance.collection("users").doc(user!.uid);
-      row['studentName'] = name;
-      row['amount'] = amount;
-      row['date'] = DateTime.now();
-      await userRef.update({
-        'contribution': FieldValue.arrayUnion([row])
-      });
-    } catch (e) {
-      print("Error");
-    }
-  }
-
   Future<bool> requirementMet(List<int> index, String studentName) async {
     try {
       final DocumentReference studentRef =
@@ -73,25 +58,28 @@ class studentDataNotifier extends StateNotifier<Map<String, dynamic>> {
         Map<String, dynamic>? studentData =
             snapshot.data() as Map<String, dynamic>?;
 
-        // print(studentData);
         if (studentData != null && studentData.containsKey('requirements')) {
           data = studentData['requirements'];
-          // print("###############Entered#################");
-          // print("DATA : $data");
 
           for (int indexes in index) {
+
             Map<String, dynamic> mapToUpdate = data[indexes];
+
             mapToUpdate['isFulfilled'] = true;
 
-            data[indexes] = mapToUpdate;
+            data.removeAt(indexes);
 
+            data.insert(data.length, mapToUpdate);
             await studentRef.update({'requirements': data});
-            await addRequirementToUser(studentName, data[indexes], 10000);
-            print('isMet field updated successfully.');
+            fetchData();
+            final Map<String, dynamic> arr = {...data[indexes]};
+            await userDataNotifier()
+                .addRequirementToUser(studentName, arr, 10000);
+                
           }
-        }
-        fetchData();
 
+          print('isMet field updated successfully.');
+        }
         // print("Yahan tk sahi tha : $data");
         return true;
       } else {

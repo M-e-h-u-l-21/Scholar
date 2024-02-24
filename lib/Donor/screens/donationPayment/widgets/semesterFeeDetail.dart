@@ -1,5 +1,5 @@
 import "package:flutter/material.dart";
-import "package:gscapp/Donor/screens/donation/donationPayment/widgets/costRow.dart";
+import 'package:gscapp/Donor/screens/donationPayment/widgets/costRow.dart';
 import "package:gscapp/utils/constants/objects.dart";
 
 class SemesterFeeDetail extends StatelessWidget {

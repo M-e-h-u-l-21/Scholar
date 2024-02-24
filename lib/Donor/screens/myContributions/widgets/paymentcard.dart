@@ -4,9 +4,15 @@ class CardContainer extends StatelessWidget {
   const CardContainer({
     required this.c,
     super.key,
+    required this.time,
+    required this.name,
+    required this.amount,
   });
 
   final Color c;
+  final String time;
+  final String name;
+  final int amount;
 
   @override
   Widget build(BuildContext context) {
@@ -20,27 +26,27 @@ class CardContainer extends StatelessWidget {
         padding: const EdgeInsets.all(16.0),
         child: Row(
           children: [
-            Container(
+            Image(
               width: 40,
               height: 40,
-              color: Colors.black,
-            ),
-            SizedBox(
-              width: MediaQuery.of(context).size.width * 0.05,
-            ),
-            SizedBox(
-              child: Text(
-                "Ronit Gupta",
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-              width: MediaQuery.of(context).size.width * 0.22,
+              image: AssetImage('assets/images/upi.png'),
             ),
             SizedBox(
               width: MediaQuery.of(context).size.width * 0.04,
             ),
             SizedBox(
               child: Text(
-                "28,000",
+                name,
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              width: MediaQuery.of(context).size.width * 0.20,
+            ),
+            SizedBox(
+              width: MediaQuery.of(context).size.width * 0.03,
+            ),
+            SizedBox(
+              child: Text(
+                amount.toString(),
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
               width: MediaQuery.of(context).size.width * 0.13,
@@ -50,10 +56,10 @@ class CardContainer extends StatelessWidget {
             ),
             SizedBox(
               child: Text(
-                "UPI",
+                time,
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
-              width: MediaQuery.of(context).size.width * 0.14,
+              width: MediaQuery.of(context).size.width * 0.16,
             ),
             // SizedBox(width: MediaQuery.of(context).size.width * 0.06),
             // Stack(

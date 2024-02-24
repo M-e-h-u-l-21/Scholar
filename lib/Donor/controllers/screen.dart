@@ -3,7 +3,7 @@ import "package:flutter/material.dart";
 import 'package:gscapp/Authentication/screens/landingPage.dart';
 import 'package:gscapp/Authentication/screens/signinscreen.dart';
 import 'package:gscapp/Donor/screens/chat/chat.dart';
-import 'package:gscapp/Donor/screens/donation/donation.dart';
+import 'package:gscapp/Donor/screens/myContributions/donation.dart';
 import 'package:gscapp/Donor/screens/home/home_page.dart';
 import 'package:gscapp/Donor/screens/profile/profile.dart';
 
