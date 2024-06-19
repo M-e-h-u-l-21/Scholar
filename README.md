@@ -1,16 +1,31 @@
-# gscapp
+# Scholar
 
-A new Flutter project.
+Scholar is a mobile application built on the Flutter framework designed to help financially disadvantaged students seek assistance from donors. The app provides a platform for students to create profiles, share their stories, and connect with potential donors who can provide financial support for their education.
 
-## Getting Started
+## Features
 
-This project is a starting point for a Flutter application.
+- **Student Profiles**: Students can create detailed profiles, including their academic achievements, financial needs, and personal stories.
+- **Donor Profiles**: Donors can create profiles to manage their donations and track the students they are supporting.
+- **Secure Donations**: Integrated secure payment gateway for seamless donation transactions.
+- **Messaging System**: Direct communication between students and donors for better transparency and support.
+- **Notification System**: Real-time notifications for new messages, donations, and updates.
 
-A few resources to get you started if this is your first Flutter project:
+## Screenshots
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+(Include some screenshots of your app here to give potential users and contributors a visual idea of what the app looks like.)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Installation
+
+To get a local copy up and running follow these simple steps:
+
+### Prerequisites
+
+- Flutter SDK: [Install Flutter](https://flutter.dev/docs/get-started/install)
+- Dart SDK: Comes with Flutter, no need for separate installation.
+- Android Studio or Visual Studio Code: Recommended IDEs for Flutter development.
+
+### Clone the repository
+
+```bash
+git clone https://github.com/M-e-h-u-l-21/Scholar.git
+cd Scholar
