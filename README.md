@@ -10,10 +10,6 @@ Scholar is a mobile application built on the Flutter framework designed to help 
 - **Messaging System**: Direct communication between students and donors for better transparency and support.
 - **Notification System**: Real-time notifications for new messages, donations, and updates.
 
-## Screenshots
-
-(Include some screenshots of your app here to give potential users and contributors a visual idea of what the app looks like.)
-
 ## Installation
 
 To get a local copy up and running follow these simple steps:
